@@ -1,0 +1,47 @@
+Define function MAIN:
+	CONN = connect to database ("phonebook.db")
+	While true (indefinite loop):
+		Text variable OPER = input (prompt = "Enter desired operation...:")
+		If lowercase OPER = "read":
+			READ_TABLE
+		If lowercase OPER = "add":
+			ADD_ROW
+		If lowercase OPER = "edit":
+			EDIT_ROW
+		If lowercase OPER = "delete":
+			DELETE_ROW
+		Else:
+			Display text ("Please enter a valid operation")
+	Close CONN
+
+Define function READ_TABLE
+	Display text (contents of CONTACTS table in CONN)
+
+Define function ADD_ROW:
+	Text variable NAME_NEW = input (prompt = "Enter name for entry:")
+	Text variable NUM_NEW = input (prompt = "Enter name for entry:")
+	Add new row to CONTACTS table in CONN (NAME = NAME_NEW, PHONE_NUM = NUM_NEW)
+
+Define function EDIT_ROW:
+	Text variable ID_SEL = input (prompt = "Enter the ID of the entry you would like to edit:")
+	Text variable ATTR_SEL = input (prompt = "Enter the attribute of the entry you would like to edit:")
+	If lowercase ATTR_SEL = "name":
+		Text variable ATTR_NEW = input (prompt = "Enter the new name:")
+		Change value in column NAME in row ID_SEL
+	If lowercase ATTR_SEL = "number":
+		Text variable ATTR_NEW = input (prompt = "Enter the new number:")
+		Change value in column PHONE_NUM in row ID_SEL
+	If lowercase ATTR_SEL = "all":
+		Text variable ATTR_NEW = input (prompt = "Enter the new name:")
+		Change value in column NAME in row ID_SEL
+		Text variable ATTR_NEW = input (prompt = "Enter the new number:")
+		Change value in column PHONE_NUM in row ID_SEL
+	Else:
+		Display text ("Please enter a valid attribute")
+
+Define function DELETE_ROW:
+	Text variable ID_INP = input (prompt = "Enter the ID of the entry you would like to delete:")
+	Delete row at ID ID_INP in CONTACTS table in CONN
+
+If used as standalone:
+	MAIN
